@@ -23,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -32,6 +31,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.codingambitions.jetpackcomposetutorial7.screens.DashboardScreen
+import com.codingambitions.jetpackcomposetutorial7.screens.ProfileDetailScreen
+import com.codingambitions.jetpackcomposetutorial7.screens.ProfileScreen
 import com.codingambitions.jetpackcomposetutorial7.ui.theme.JetpackComposeTutorial7Theme
 
 class MainActivity : ComponentActivity() {
@@ -174,51 +176,14 @@ fun TabsNavGraph() {
         ) {
             navigation(startDestination = "dashboard", route = "home") {
                 composable(route = "dashboard") {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Home",
-                            style = MaterialTheme.typography.headlineMedium
-                        )
-                        TextButton(onClick = {
-                            navController.navigate("profile_detail")
-                        }) {
-                            Text(text = "Go To Nested Profile Detail")
-                        }
-                    }
+                    DashboardScreen(navController = navController)
                 }
                 composable(route = "profile_detail") {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Profile Detail",
-                            style = MaterialTheme.typography.headlineMedium
-                        )
-                        TextButton(onClick = {
-                            navController.popBackStack()
-                        }) {
-                            Text(text = "Go Back")
-                        }
-                    }
+                    ProfileDetailScreen(navController = navController)
                 }
             }
             composable(route = "profile") {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "User Profile",
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                }
+                ProfileScreen()
             }
         }
 
