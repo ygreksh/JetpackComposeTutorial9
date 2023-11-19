@@ -30,34 +30,33 @@ fun RootNavGraph() {
             }
         }
 
-
         composable(route = "tabs") {
             TabsNavGraph()
         }
 
         // Optional arguments
-        composable(
-            route = "account?userId={userId}",
-            arguments = listOf(navArgument("userId") { defaultValue = "1" })
-        ) { backStackEntry ->
-            val userId = backStackEntry.arguments?.getString("userId")
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Account Screen",
-                    style = MaterialTheme.typography.headlineMedium
-                )
-                Text(text = "userId=$userId")
-                TextButton(onClick = {
-                    navController.popBackStack()
-                }) {
-                    Text(text = "Go Back")
-                }
-            }
-        }
+//        composable(
+//            route = "account?userId={userId}",
+//            arguments = listOf(navArgument("userId") { defaultValue = "1" })
+//        ) { backStackEntry ->
+//            val userId = backStackEntry.arguments?.getString("userId")
+//            Column(
+//                modifier = Modifier.fillMaxSize(),
+//                verticalArrangement = Arrangement.Center,
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                Text(
+//                    text = "Account Screen",
+//                    style = MaterialTheme.typography.headlineMedium
+//                )
+//                Text(text = "userId=$userId")
+//                TextButton(onClick = {
+//                    navController.popBackStack()
+//                }) {
+//                    Text(text = "Go Back")
+//                }
+//            }
+//        }
     }
 }
 
@@ -67,8 +66,11 @@ sealed class Screens(val route: String) {
         object Username : Screens("username")
         object Password : Screens("password")
     }
-    object Home : Screens("home") {
-        object ProfileDetail : Screens("profile_detail")
+
+    object Tabs : Screens("tabs") {
+        object Home : Screens("home") {
+            object ProfileDetail : Screens("profile_detail")
+        }
+        object Profile : Screens("profile")
     }
-    object Profile : Screens("profile")
 }
