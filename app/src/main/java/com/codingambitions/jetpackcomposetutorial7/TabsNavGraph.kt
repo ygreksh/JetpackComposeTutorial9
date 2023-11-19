@@ -21,12 +21,12 @@ fun TabsNavGraph() {
         bottomBar = {
             MainNavBar(navController = navController)
         }
-    ) { innerPadding ->
+    ) { paddingValues ->
 
         NavHost(
             navController = navController,
             startDestination = Screens.Tabs.Home.route,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(paddingValues)
         ) {
             navigation(startDestination = Screens.Tabs.Home.Dashboard.route, route = Screens.Tabs.Home.route) {
                 composable(route = Screens.Tabs.Home.Dashboard.route) {
@@ -50,6 +50,6 @@ val items = listOf(
 )
 
 sealed class MainScreens(val route: String, val title: String) {
-    object Home : MainScreens("home", "Home")
-    object Profile : MainScreens("profile", "Profile")
+    object Home : MainScreens(Screens.Tabs.Home.route, "Home")
+    object Profile : MainScreens(Screens.Tabs.Profile.route, "Profile")
 }
