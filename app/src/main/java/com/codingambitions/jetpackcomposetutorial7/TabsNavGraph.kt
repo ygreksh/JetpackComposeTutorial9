@@ -12,6 +12,7 @@ import com.codingambitions.jetpackcomposetutorial7.screens.DashboardScreen
 import com.codingambitions.jetpackcomposetutorial7.screens.MainNavBar
 import com.codingambitions.jetpackcomposetutorial7.screens.ProfileDetailScreen
 import com.codingambitions.jetpackcomposetutorial7.screens.ProfileScreen
+import com.codingambitions.jetpackcomposetutorial7.screens.Screens
 
 @Composable
 fun TabsNavGraph() {
@@ -24,18 +25,18 @@ fun TabsNavGraph() {
 
         NavHost(
             navController = navController,
-            startDestination = "home",
+            startDestination = Screens.Tabs.Home.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            navigation(startDestination = "dashboard", route = "home") {
-                composable(route = "dashboard") {
+            navigation(startDestination = Screens.Tabs.Home.Dashboard.route, route = Screens.Tabs.Home.route) {
+                composable(route = Screens.Tabs.Home.Dashboard.route) {
                     DashboardScreen(navController = navController)
                 }
-                composable(route = "profile_detail") {
+                composable(route = Screens.Tabs.Home.ProfileDetail.route) {
                     ProfileDetailScreen(navController = navController)
                 }
             }
-            composable(route = "profile") {
+            composable(route = Screens.Tabs.Profile.route) {
                 ProfileScreen()
             }
         }

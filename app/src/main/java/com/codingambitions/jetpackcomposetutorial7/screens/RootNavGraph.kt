@@ -19,18 +19,18 @@ import com.codingambitions.jetpackcomposetutorial7.TabsNavGraph
 @Composable
 fun RootNavGraph() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(navController = navController, startDestination = Screens.Login.route) {
 
-        navigation(startDestination = "username", route = "login") {
-            composable(route = "username") {
+        navigation(startDestination = Screens.Login.Username.route, route = Screens.Login.route) {
+            composable(route = Screens.Login.Username.route) {
                 UsernameScreen(navController = navController)
             }
-            composable(route = "password") {
+            composable(route = Screens.Login.Password.route) {
                 PasswordScreen(navController = navController)
             }
         }
 
-        composable(route = "tabs") {
+        composable(route = Screens.Tabs.route) {
             TabsNavGraph()
         }
 
@@ -69,6 +69,7 @@ sealed class Screens(val route: String) {
 
     object Tabs : Screens("tabs") {
         object Home : Screens("home") {
+            object Dashboard : Screens("dashboard")
             object ProfileDetail : Screens("profile_detail")
         }
         object Profile : Screens("profile")
