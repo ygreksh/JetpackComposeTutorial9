@@ -32,6 +32,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.codingambitions.jetpackcomposetutorial7.screens.DashboardScreen
+import com.codingambitions.jetpackcomposetutorial7.screens.MainNavBar
 import com.codingambitions.jetpackcomposetutorial7.screens.ProfileDetailScreen
 import com.codingambitions.jetpackcomposetutorial7.screens.ProfileScreen
 import com.codingambitions.jetpackcomposetutorial7.ui.theme.JetpackComposeTutorial7Theme
@@ -125,47 +126,7 @@ fun TabsNavGraph() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
-            NavigationBar {
-                val backStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = backStackEntry?.destination
-                items.forEach { screen ->
-                    NavigationBarItem(
-                        selected = currentDestination?.hierarchy?.any {
-                            it.route == screen.route
-                        } == true,
-                        label = { Text(stringResource(screen.resource)) },
-                        icon = {
-                            Icon(
-                                imageVector = if (screen.route == "home") Icons.Default.Home else Icons.Default.AccountBox,
-                                contentDescription = null
-                            )
-                        },
-                        onClick = {
-                            navController.navigate(screen.route) {
-
-
-                                // findStartDestination -> Finds the actual start destination of the graph,
-                                // handling cases where the graph's starting destination is itself a NavGraph(nested navigation)
-
-                                // popUpTo :-  clears the back stack and the state of all
-                                // destinations between the current destination and the NavOptionsBuilder.popUpTo ID
-                                // But if we use saveState = true, it will save that state( back stack and the state of all
-                                // destinations between the current destination and the NavOptionsBuilder.popUpTo ID)
-                                // before it clears backstack entries upto popUpTo ID,
-                                // and later it restore that backstack if we use restoreState = true
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-
-                                launchSingleTop = true
-
-                                restoreState = true
-
-                            }
-                        },
-                    )
-                }
-            }
+            MainNavBar(navController = navController)
         }
     ) { innerPadding ->
 
