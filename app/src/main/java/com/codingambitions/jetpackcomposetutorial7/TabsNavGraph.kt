@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -25,20 +27,22 @@ fun TabsNavGraph() {
 
         NavHost(
             navController = navController,
-            startDestination = Screens.Tabs.Home.route,
+            startDestination = Screens.Tabs.route,
             modifier = Modifier.padding(paddingValues)
         ) {
-            navigation(startDestination = Screens.Tabs.Home.Dashboard.route, route = Screens.Tabs.Home.route) {
-                composable(route = Screens.Tabs.Home.Dashboard.route) {
-                    DashboardScreen(navController = navController)
-                }
-                composable(route = Screens.Tabs.Home.ProfileDetail.route) {
-                    ProfileDetailScreen(navController = navController)
-                }
-            }
-            composable(route = Screens.Tabs.Profile.route) {
-                ProfileScreen()
-            }
+
+            tabsNavGraph(navController = navController)
+//            navigation(startDestination = Screens.Tabs.Home.Dashboard.route, route = Screens.Tabs.Home.route) {
+//                composable(route = Screens.Tabs.Home.Dashboard.route) {
+//                    DashboardScreen(navController = navController)
+//                }
+//                composable(route = Screens.Tabs.Home.ProfileDetail.route) {
+//                    ProfileDetailScreen(navController = navController)
+//                }
+//            }
+//            composable(route = Screens.Tabs.Profile.route) {
+//                ProfileScreen()
+//            }
         }
 
     }
@@ -52,4 +56,23 @@ val items = listOf(
 sealed class MainScreens(val route: String, val title: String) {
     object Home : MainScreens(Screens.Tabs.Home.route, "Home")
     object Profile : MainScreens(Screens.Tabs.Profile.route, "Profile")
+}
+
+fun NavGraphBuilder.tabsNavGraph(navController: NavHostController) {
+    navigation(
+        route = Screens.Tabs.route,
+        startDestination = Screens.Tabs.Home.route,
+    ) {
+        navigation(startDestination = Screens.Tabs.Home.Dashboard.route, route = Screens.Tabs.Home.route) {
+            composable(route = Screens.Tabs.Home.Dashboard.route) {
+                DashboardScreen(navController = navController)
+            }
+            composable(route = Screens.Tabs.Home.ProfileDetail.route) {
+                ProfileDetailScreen(navController = navController)
+            }
+        }
+        composable(route = Screens.Tabs.Profile.route) {
+            ProfileScreen()
+        }
+    }
 }
