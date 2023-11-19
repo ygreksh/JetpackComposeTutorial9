@@ -23,41 +23,10 @@ fun RootNavGraph() {
 
         navigation(startDestination = "username", route = "login") {
             composable(route = "username") {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "Username",
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                    TextButton(onClick = {
-                        navController.navigate("password")
-                    }) {
-                        Text(text = "Next")
-                    }
-                }
+                UsernameScreen(navController = navController)
             }
             composable(route = "password") {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "Password",
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                    TextButton(onClick = {
-                        navController.navigate("tabs") {
-                            // clear back stack for nested navigation
-                            popUpTo("login")
-                        }
-                    }) {
-                        Text(text = "Submit and Go To Home")
-                    }
-                }
+                PasswordScreen(navController = navController)
             }
         }
 
@@ -94,9 +63,10 @@ fun RootNavGraph() {
 
 
 sealed class Screens(val route: String) {
-    object Login : Screens("login")
-    object Username : Screens("username")
-    object Password : Screens("password")
+    object Login : Screens("login") {
+        object Username : Screens("username")
+        object Password : Screens("password")
+    }
     object Home : Screens("home") {
         object ProfileDetail : Screens("profile_detail")
     }
