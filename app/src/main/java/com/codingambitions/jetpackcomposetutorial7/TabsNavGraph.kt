@@ -30,19 +30,7 @@ fun TabsNavGraph() {
             startDestination = Screens.Tabs.route,
             modifier = Modifier.padding(paddingValues)
         ) {
-
             tabsNavGraph(navController = navController)
-//            navigation(startDestination = Screens.Tabs.Home.Dashboard.route, route = Screens.Tabs.Home.route) {
-//                composable(route = Screens.Tabs.Home.Dashboard.route) {
-//                    DashboardScreen(navController = navController)
-//                }
-//                composable(route = Screens.Tabs.Home.ProfileDetail.route) {
-//                    ProfileDetailScreen(navController = navController)
-//                }
-//            }
-//            composable(route = Screens.Tabs.Profile.route) {
-//                ProfileScreen()
-//            }
         }
 
     }

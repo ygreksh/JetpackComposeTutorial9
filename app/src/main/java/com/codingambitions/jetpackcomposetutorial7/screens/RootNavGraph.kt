@@ -9,6 +9,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -21,18 +23,21 @@ fun RootNavGraph() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screens.Login.route) {
 
-        navigation(startDestination = Screens.Login.Username.route, route = Screens.Login.route) {
-            composable(route = Screens.Login.Username.route) {
-                UsernameScreen(navController = navController)
-            }
-            composable(route = Screens.Login.Password.route) {
-                PasswordScreen(navController = navController)
-            }
-        }
+        loginNavGraph(navController = navController)
+
+//        navigation(startDestination = Screens.Login.Username.route, route = Screens.Login.route) {
+//            composable(route = Screens.Login.Username.route) {
+//                UsernameScreen(navController = navController)
+//            }
+//            composable(route = Screens.Login.Password.route) {
+//                PasswordScreen(navController = navController)
+//            }
+//        }
 
         composable(route = Screens.Tabs.route) {
             TabsNavGraph()
         }
+
 
         // Optional arguments
 //        composable(
@@ -73,5 +78,16 @@ sealed class Screens(val route: String) {
             object ProfileDetail : Screens("profile_detail")
         }
         object Profile : Screens("profile")
+    }
+}
+
+fun NavGraphBuilder.loginNavGraph(navController: NavHostController) {
+    navigation(startDestination = Screens.Login.Username.route, route = Screens.Login.route) {
+        composable(route = Screens.Login.Username.route) {
+            UsernameScreen(navController = navController)
+        }
+        composable(route = Screens.Login.Password.route) {
+            PasswordScreen(navController = navController)
+        }
     }
 }
