@@ -10,14 +10,12 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.codingambitions.jetpackcomposetutorial7.Screen
+import com.codingambitions.jetpackcomposetutorial7.MainScreens
 import com.codingambitions.jetpackcomposetutorial7.items
 
 @Composable
@@ -29,7 +27,7 @@ fun MainNavBar(
         val currentDestination = backStackEntry?.destination
         items.forEach { screen ->
             AddItem(
-                screen = screen,
+                mainScreens = screen,
                 currentDestination = currentDestination,
                 navController = navController
             )
@@ -39,23 +37,23 @@ fun MainNavBar(
 
 @Composable
 fun RowScope.AddItem(
-    screen: Screen,
+    mainScreens: MainScreens,
     currentDestination: NavDestination?,
     navController: NavHostController
 ) {
     NavigationBarItem(
         selected = currentDestination?.hierarchy?.any {
-            it.route == screen.route
+            it.route == mainScreens.route
         } == true,
-        label = { Text(stringResource(screen.resource)) },
+        label = { Text(text = mainScreens.title) },
         icon = {
             Icon(
-                imageVector = if (screen.route == "home") Icons.Default.Home else Icons.Default.AccountBox,
+                imageVector = if (mainScreens.route == "home") Icons.Default.Home else Icons.Default.AccountBox,
                 contentDescription = null
             )
         },
         onClick = {
-            navController.navigate(screen.route) {
+            navController.navigate(mainScreens.route) {
 
 
                 // findStartDestination -> Finds the actual start destination of the graph,

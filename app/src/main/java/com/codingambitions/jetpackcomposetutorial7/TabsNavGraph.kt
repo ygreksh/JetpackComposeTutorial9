@@ -1,6 +1,5 @@
 package com.codingambitions.jetpackcomposetutorial7
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -45,11 +44,11 @@ fun TabsNavGraph() {
 }
 
 val items = listOf(
-    Screen.Home,
-    Screen.Profile,
+    MainScreens.Home,
+    MainScreens.Profile,
 )
 
-sealed class Screen(val route: String, @StringRes val resource: Int) {
-    object Home : Screen("home", R.string.home)
-    object Profile : Screen("profile", R.string.profile)
+sealed class MainScreens(val route: String, val title: String) {
+    object Home : MainScreens("home", "Home")
+    object Profile : MainScreens("profile", "Profile")
 }

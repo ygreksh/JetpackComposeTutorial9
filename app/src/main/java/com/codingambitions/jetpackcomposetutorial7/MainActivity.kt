@@ -35,6 +35,7 @@ import com.codingambitions.jetpackcomposetutorial7.screens.DashboardScreen
 import com.codingambitions.jetpackcomposetutorial7.screens.MainNavBar
 import com.codingambitions.jetpackcomposetutorial7.screens.ProfileDetailScreen
 import com.codingambitions.jetpackcomposetutorial7.screens.ProfileScreen
+import com.codingambitions.jetpackcomposetutorial7.screens.RootNavGraph
 import com.codingambitions.jetpackcomposetutorial7.ui.theme.JetpackComposeTutorial7Theme
 
 class MainActivity : ComponentActivity() {
@@ -42,80 +43,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeTutorial7Theme {
-
-                val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "login") {
-
-                    navigation(startDestination = "username", route = "login") {
-                        composable(route = "username") {
-                            Column(
-                                modifier = Modifier.fillMaxSize(),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = "Username",
-                                    style = MaterialTheme.typography.headlineMedium
-                                )
-                                TextButton(onClick = {
-                                    navController.navigate("password")
-                                }) {
-                                    Text(text = "Next")
-                                }
-                            }
-                        }
-                        composable(route = "password") {
-                            Column(
-                                modifier = Modifier.fillMaxSize(),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = "Password",
-                                    style = MaterialTheme.typography.headlineMedium
-                                )
-                                TextButton(onClick = {
-                                    navController.navigate("tabs") {
-                                        // clear back stack for nested navigation
-                                        popUpTo("login")
-                                    }
-                                }) {
-                                    Text(text = "Submit and Go To Home")
-                                }
-                            }
-                        }
-                    }
-
-
-                    composable(route = "tabs") {
-                        TabsNavGraph()
-                    }
-
-                    // Optional arguments
-                    composable(
-                        route = "account?userId={userId}",
-                        arguments = listOf(navArgument("userId") { defaultValue = "1" })
-                    ) { backStackEntry ->
-                        val userId = backStackEntry.arguments?.getString("userId")
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = "Account Screen",
-                                style = MaterialTheme.typography.headlineMedium
-                            )
-                            Text(text = "userId=$userId")
-                            TextButton(onClick = {
-                                navController.popBackStack()
-                            }) {
-                                Text(text = "Go Back")
-                            }
-                        }
-                    }
-                }
-
+                RootNavGraph()
             }
         }
     }
