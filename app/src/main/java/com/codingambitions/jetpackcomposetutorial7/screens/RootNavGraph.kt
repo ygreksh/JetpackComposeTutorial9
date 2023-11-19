@@ -25,15 +25,6 @@ fun RootNavGraph() {
 
         loginNavGraph(navController = navController)
 
-//        navigation(startDestination = Screens.Login.Username.route, route = Screens.Login.route) {
-//            composable(route = Screens.Login.Username.route) {
-//                UsernameScreen(navController = navController)
-//            }
-//            composable(route = Screens.Login.Password.route) {
-//                PasswordScreen(navController = navController)
-//            }
-//        }
-
         composable(route = Screens.Tabs.route) {
             TabsNavGraph()
         }

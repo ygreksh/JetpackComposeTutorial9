@@ -51,16 +51,23 @@ fun NavGraphBuilder.tabsNavGraph(navController: NavHostController) {
         route = Screens.Tabs.route,
         startDestination = Screens.Tabs.Home.route,
     ) {
-        navigation(startDestination = Screens.Tabs.Home.Dashboard.route, route = Screens.Tabs.Home.route) {
-            composable(route = Screens.Tabs.Home.Dashboard.route) {
-                DashboardScreen(navController = navController)
-            }
-            composable(route = Screens.Tabs.Home.ProfileDetail.route) {
-                ProfileDetailScreen(navController = navController)
-            }
-        }
+        homeNavGraph(navController = navController)
         composable(route = Screens.Tabs.Profile.route) {
             ProfileScreen()
+        }
+    }
+}
+
+fun NavGraphBuilder.homeNavGraph(navController: NavHostController) {
+    navigation(
+        route = Screens.Tabs.Home.route,
+        startDestination = Screens.Tabs.Home.Dashboard.route,
+    ) {
+        composable(route = Screens.Tabs.Home.Dashboard.route) {
+            DashboardScreen(navController = navController)
+        }
+        composable(route = Screens.Tabs.Home.ProfileDetail.route) {
+            ProfileDetailScreen(navController = navController)
         }
     }
 }
