@@ -19,7 +19,7 @@ import com.codingambitions.jetpackcomposetutorial7.MainScreens
 import com.codingambitions.jetpackcomposetutorial7.items
 
 @Composable
-fun MainNavBar(
+fun BottomBar(
     navController: NavHostController
 ) {
     NavigationBar {

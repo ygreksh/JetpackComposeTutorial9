@@ -21,7 +21,10 @@ import com.codingambitions.jetpackcomposetutorial7.TabsNavGraph
 @Composable
 fun RootNavGraph() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screens.Login.route) {
+    NavHost(
+        navController = navController,
+        startDestination = Screens.Login.route
+    ) {
 
         loginNavGraph(navController = navController)
 

@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.codingambitions.jetpackcomposetutorial7.screens.DashboardScreen
-import com.codingambitions.jetpackcomposetutorial7.screens.MainNavBar
+import com.codingambitions.jetpackcomposetutorial7.screens.BottomBar
 import com.codingambitions.jetpackcomposetutorial7.screens.ProfileDetailScreen
 import com.codingambitions.jetpackcomposetutorial7.screens.ProfileScreen
 import com.codingambitions.jetpackcomposetutorial7.screens.Screens
@@ -21,17 +21,16 @@ fun TabsNavGraph() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
-            MainNavBar(navController = navController)
+            BottomBar(navController = navController)
         }
     ) { paddingValues ->
-
-        NavHost(
-            navController = navController,
-            startDestination = Screens.Tabs.route,
-            modifier = Modifier.padding(paddingValues)
-        ) {
-            tabsNavGraph(navController = navController)
-        }
+            NavHost(
+                navController = navController,
+                startDestination = Screens.Tabs.route,
+                modifier = Modifier.padding(paddingValues)
+            ) {
+                tabsNavGraph(navController = navController)
+            }
 
     }
 }
